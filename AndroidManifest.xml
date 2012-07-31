@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:a="http://schemas.android.com/apk/res/android"
+          package="com.idc.example.poker"
+          a:versionCode="1"
+          a:versionName="1.0">
+
+    <uses-sdk a:minSdkVersion="8" a:targetSdkVersion="14"/>
+
+    <supports-screens
+            a:largeScreens="true"
+            a:normalScreens="true"
+            a:smallScreens="true"
+            a:resizeable="true"
+            a:anyDensity="true"/>
+
+    <application a:label="@string/app_name" a:icon="@drawable/ic_launcher" a:debuggable="true">
+        <activity a:name="PokerTourCalc"
+                  a:label="@string/app_name"
+                  a:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
+            <intent-filter>
+                <action a:name="android.intent.action.MAIN"/>
+                <category a:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+    <uses-permission a:name="android.permission.VIBRATE"/>
+    <uses-permission a:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission a:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission a:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission a:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission a:name="android.permission.INTERNET"/>
+    <uses-permission a:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission a:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission a:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission a:name="android.permission.READ_CONTACTS"/>
+    <uses-permission a:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission a:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission a:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission a:name="android.permission.BROADCAST_STICKY"/>
+</manifest>
