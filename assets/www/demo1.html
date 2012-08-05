@@ -9,14 +9,14 @@
 	<title>Flickable.js / Demo 1</title>
 	
 	<!-- Mobile viewport optimization -->
-	<meta name="viewport" content="width=640">
+	<meta name="viewport" content="width=480">
 	
 
 	<!-- Shared Scripts -->
-	<script src="../libs/modernizr-2.0.6.min.js"></script>
-	<script src="../libs/zepto.min.js"></script>
-	<script src="../src/zepto.flickable.min.js"></script>
-	<script src="js/demo.js"></script>
+	<!--<script src="../libs/modernizr-2.0.6.min.js"></script>-->
+	<script src="zepto.min.js"></script>
+	<script src="zepto.flickable.min.js"></script>
+	<script src="demo.js"></script>
 
 	<!-- Demo 1 Scripts -->
 	<script type="text/javascript">
@@ -31,7 +31,7 @@
 				el.toggleClass('flipped')
 			});
 			
-				if(!Modernizr.touch) {
+				if(false) {
 					//If you're on a desktop, show next/prev links for mouse navigation
 					$('#demo1-intro').append('<p><a class="prev">Prev</a> | <a class="next">Next</a></p>');
 					$('.next').click(function() { $('#demo1').flickable('scrollNext');});
@@ -95,7 +95,7 @@
 	.back {
 		color: #fff;
 		-webkit-transform: rotateY(180deg) translate3d(0,0,0);
-		background: url(img/fabric.png);
+		background: url(fabric.png);
 	}
 	
 	.card {
