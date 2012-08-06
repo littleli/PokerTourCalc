@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="jquery.mobile.min.css">
+    <script src="cordova-2.0.0.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.mobile.min.js"></script>
+</head>
+
+<body>
+
+<section data-role="page">
+
+    <header data-role="header" id="welcome">
+        <h1>PokerTour Points</h1>
+    </header>
+
+    <section data-role="content">
+        <img src="images/poker-icon.png" alt="logo">
+        <br>
+        <a href="#calculator" data-role="button" data-icon="star" data-theme="a">Tap to begin</a>
+    </section>
+
+</section>
+
+<section data-role="page" id="calculator">
+
+    <header data-role="header">
+        <h1>Calculate please</h1>
+    </header>
+
+    <section data-role="content">
+        <label for="buyin" class="ui-hidden-accessible">Buy in</label>
+        <input type="number" id="buyin" name="buyin" value="300" placeholder="Buy in (min 300)" min="300">
+
+        <label for="players" class="ui-hidden-accessible">Number of players</label>
+        <input type="number" id="players" name="players" value="7" placeholder="# of players" min="3">
+
+        <label for="position" class="ui-hidden-accessible">Final position</label>
+        <input type="number" id="position" name="position" placeholder="Final position">
+
+        <div id="score">
+            &nbsp;
+        </div>
+
+        <a href="#" id="count_score" data-role="button" data-theme="b">Count</a>
+        <a href="#scoreboard" id="count_scoreboard" data-role="button" data-theme="a">Score board</a>
+    </section>
+
+</section>
+
+<section data-role="page" id="scoreboard">
+
+    <header data-role="header">
+        <h1>Poker Tour Calculator</h1>
+    </header>
+
+    <section data-role="content">
+       <ul data-role="listview" data-inset="false" data-filter="true">
+           <li>1.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">125</span></li>
+           <li>2.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">80</span></li>
+           <li>3.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">12</span></li>
+       </ul>
+    </section>
+
+</section>
+
+</body>
+
+</html>

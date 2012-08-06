@@ -8,6 +8,6 @@ public class PokerTourCalc extends DroidGap {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.loadUrl("file:///android_asset/www/demo1.html");
+        super.loadUrl("file:///android_asset/www/pokercalc.html");
     }
 }
