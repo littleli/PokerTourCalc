@@ -8,6 +8,7 @@
     <script src="cordova-2.0.0.js"></script>
     <script src="jquery.min.js"></script>
     <script src="jquery.mobile.min.js"></script>
+    <script src="jsrender.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
     <section data-role="content">
         <img src="images/poker-icon.png" alt="logo">
         <br>
-        <a href="#calculator" data-role="button" data-icon="star" data-theme="a">Tap to begin</a>
+        <a href="#calculator" data-role="button" data-transition="flow" data-icon="star" data-theme="a">Tap to begin</a>
     </section>
 
 </section>
@@ -34,10 +35,10 @@
 
     <section data-role="content">
         <label for="buyin" class="ui-hidden-accessible">Buy in</label>
-        <input type="number" id="buyin" name="buyin" value="300" placeholder="Buy in (min 300)" min="300">
+        <input type="number" id="buyin" name="buyin" value="300" min="300" placeholder="Buy in">
 
         <label for="players" class="ui-hidden-accessible">Number of players</label>
-        <input type="number" id="players" name="players" value="7" placeholder="# of players" min="3">
+        <input type="number" id="players" name="players" value="7" min="3" placeholder="# of players">
 
         <label for="position" class="ui-hidden-accessible">Final position</label>
         <input type="number" id="position" name="position" placeholder="Final position">
@@ -47,7 +48,10 @@
         </div>
 
         <a href="#" id="count_score" data-role="button" data-theme="b">Count</a>
-        <a href="#scoreboard" id="count_scoreboard" data-role="button" data-theme="a">Score board</a>
+        <a href="#scoreboard" id="to_scoreboard" data-transition="flow"
+           data-role="button" data-theme="a">
+            Score board
+        </a>
     </section>
 
 </section>
@@ -59,15 +63,42 @@
     </header>
 
     <section data-role="content">
-       <ul data-role="listview" data-inset="false" data-filter="true">
-           <li>1.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">125</span></li>
-           <li>2.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">80</span></li>
-           <li>3.<span class="ui-li-count ui-btn-up-e ui-btn-corner-br ui-btn-corner-tl">12</span></li>
-       </ul>
+        <ul id="ranks" data-role="listview" data-inset="false" data-filter="true">
+        </ul>
     </section>
 
 </section>
 
+<script id="scoreboardEntry" type="text/x-jsrender">
+    <li>{{>rank}}.<span class="ui-li-count ui-btn-down-e ui-btn-corner-all">{{>points}}</span></li>
+</script>
+
+<script>
+    function scoreboard(buyin, players, final) {
+        var countPointsForPosition = function(pos) {
+            var multiplePoints = buyin < 1000 ? 10 : 20;
+            return Math.ceil(multiplePoints * Math.sqrt((Math.sqrt(buyin) * (players - 6) / pos)));
+        }
+        var numberOfRanks = Math.ceil(players * 0.2);
+        var ranks = [];
+        for (var i = 0; i < numberOfRanks; i++) {
+            ranks[i] = { rank: i + 1, points: countPointsForPosition(i + 1) };
+        }
+        return ranks;
+    }
+
+    $.templates({
+        scoreEntry:"#scoreboardEntry"
+    });
+
+    $("#to_scoreboard").on("tap", function(e) {
+        $("#ranks").html(
+                $.render.scoreEntry(scoreboard(
+                        $("#buyin").val(), $("#players").val(), $("#position").val()
+                ))
+        ).listview('refresh');
+    });
+</script>
 </body>
 
 </html>
