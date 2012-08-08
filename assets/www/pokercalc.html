@@ -70,7 +70,7 @@
 </section>
 
 <script id="scoreboardEntry" type="text/x-jsrender">
-    <li>{{>rank}}.<span class="ui-li-count ui-btn-down-e ui-btn-corner-all">{{>points}}</span></li>
+    <li {{if highlight}}data-theme="b"{{/if}}>{{>rank}}.<span class="ui-li-count ui-btn-down-e ui-btn-corner-all">{{>points}}</span></li>
 </script>
 
 <script>
@@ -81,8 +81,8 @@
         }
         var numberOfRanks = Math.ceil(players * 0.2);
         var ranks = [];
-        for (var i = 0; i < numberOfRanks; i++) {
-            ranks[i] = { rank: i + 1, points: countPointsForPosition(i + 1) };
+        for (var i = 0, j = 1; i < numberOfRanks; i++, j++) {
+            ranks[i] = { rank: j, points: countPointsForPosition(j), highlight: j == final };
         }
         return ranks;
     }
