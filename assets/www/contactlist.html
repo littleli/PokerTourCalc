@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="jquery.mobile.min.css">
+    <script src="cordova-2.0.0.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.mobile.min.js"></script>
+    <script src="jsrender.js"></script>
+</head>
+
+<body>
+
+<section data-role="page" id="contacts">
+
+    <header data-role="header">
+        <h1>Contact list</h1>
+    </header>
+
+    <section data-role="content">
+        <ul id="contactlist" data-role="listview" data-filter="true">
+            <li data-theme="c">No contact</li>
+        </ul>
+    </section>
+
+</section>
+
+<script id="contactListEntry" type="text/x-jsrender">
+    <li data-theme="c">{{>displayName}}</li>
+</script>
+
+<script>
+    $.templates({
+        contactListEntry:"#contactListEntry"
+    });
+
+    $(document).bind("pause", function(o) {
+        storage.save(mujObject);
+    });
+
+    $(document).bind("deviceready", function (deviceready) {
+        alert("Network type: " + navigator.network.connection.type);
+
+        var options = new ContactFindOptions();
+        options.filter = "";
+        options.multiple = true;
+
+        navigator.contacts.find(["displayName", "name", "givenName"],
+                function (contactList) { // success callback
+                    alert("number of contacts found: " + contactList.length);
+                    $("#contactlist").html(
+                        $.render.contactListEntry(contactList)
+                    ).listview("refresh");
+                },
+                function (error) { // failure callback
+                    alert("Doh!");
+                },
+                options
+        );
+    });
+</script>
+</body>
+</html>
