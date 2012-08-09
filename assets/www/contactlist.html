@@ -36,10 +36,6 @@
         contactListEntry:"#contactListEntry"
     });
 
-    $(document).bind("pause", function(o) {
-        storage.save(mujObject);
-    });
-
     $(document).bind("deviceready", function (deviceready) {
         alert("Network type: " + navigator.network.connection.type);
 
