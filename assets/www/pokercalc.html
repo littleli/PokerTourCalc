@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="jquery.mobile.min.css">
+
+    <style>
+        #score { font-size: 250%; text-align: center; display: none; }
+    </style>
     <script src="cordova-2.0.0.js"></script>
     <script src="jquery.min.js"></script>
     <script src="jquery.mobile.min.js"></script>
@@ -43,8 +47,8 @@
         <label for="position" class="ui-hidden-accessible">Final position</label>
         <input type="number" id="position" name="position" placeholder="Final position">
 
-        <div id="score">
-            &nbsp;
+        <div style="height:60px">
+        <div id="score"></div>
         </div>
 
         <a href="#" id="count_score" data-role="button" data-theme="b">Count</a>
@@ -59,7 +63,7 @@
 <section data-role="page" id="scoreboard">
 
     <header data-role="header">
-        <h1>Poker Tour Calculator</h1>
+        <h1>Score board</h1>
     </header>
 
     <section data-role="content">
@@ -74,15 +78,16 @@
 </script>
 
 <script>
+    function countPointsForPosition(buyin, players, pos) {
+        var multiplePoints = buyin < 1000 ? 10 : 20;
+        return Math.ceil(multiplePoints * Math.sqrt((Math.sqrt(buyin) * (players - 6) / pos)));
+    }
+
     function scoreboard(buyin, players, final) {
-        var countPointsForPosition = function(pos) {
-            var multiplePoints = buyin < 1000 ? 10 : 20;
-            return Math.ceil(multiplePoints * Math.sqrt((Math.sqrt(buyin) * (players - 6) / pos)));
-        }
         var numberOfRanks = Math.ceil(players * 0.2);
         var ranks = [];
         for (var i = 0, j = 1; i < numberOfRanks; i++, j++) {
-            ranks[i] = { rank: j, points: countPointsForPosition(j), highlight: j == final };
+            ranks[i] = { rank: j, points: countPointsForPosition(buyin, players, j), highlight: j == final };
         }
         return ranks;
     }
@@ -97,6 +102,17 @@
                         $("#buyin").val(), $("#players").val(), $("#position").val()
                 ))
         ).listview('refresh');
+    });
+
+    $("#count_score").on("tap", function(e){
+        var score = $("#score");
+        if (score.is(":hidden")) {
+            score.html( countPointsForPosition(
+                    $("#buyin").val(), $("#players").val(), $("#position").val()
+            )).show("slow");
+        } else {
+            score.hide("slow");
+        }
     });
 </script>
 </body>
